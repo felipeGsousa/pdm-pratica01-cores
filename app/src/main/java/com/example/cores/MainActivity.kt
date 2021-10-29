@@ -9,6 +9,7 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
+    private var geraCores = GeraCores()
     private lateinit var textViewMensagem: TextView
     private lateinit var tela: View
 
@@ -22,19 +23,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun onClick(view: View){
-        var cores: String
-        var separaCores: ArrayList<String>
+        var cores: ArrayList<Int>
 
-        cores = GeraCores().toString()
+        cores = this.geraCores.setCores()
 
-        this.textViewMensagem.text = cores.subSequence(1, cores.length-1).toString().replace(",","")
+        this.textViewMensagem.text = cores[0].toString() + " " + cores[1].toString() + " " + cores[2].toString()
 
-        separaCores = this.textViewMensagem.text.split(" ") as ArrayList<String>
-
-        var red = separaCores[0]
-        var green = separaCores[1]
-        var blue = separaCores[2]
-
-        this.tela.setBackgroundColor(Color.rgb(red.toInt(), green.toInt(), blue.toInt()))
+        this.tela.setBackgroundColor(Color.rgb(cores[0], cores[1], cores[2]))
     }
 }
